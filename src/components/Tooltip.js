@@ -44,7 +44,7 @@ const Tooltip = ({
         {
           !isLastStep ?
             <TouchableOpacity onPress={handleStop}>
-              <Button style={[styles.buttonSkipText]}>Skip tour</Button>
+              <Button style={[styles.buttonSkipText]}>Skip</Button>
             </TouchableOpacity>
             : null
         }

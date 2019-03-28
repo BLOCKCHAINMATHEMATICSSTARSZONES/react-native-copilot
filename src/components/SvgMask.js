@@ -7,8 +7,9 @@ import {
   Dimensions,
 } from 'react-native';
 // import { Svg } from 'expo';
-import Svg from 'react-native-svg';
+import Svg, { Path, RadialGradient, Defs, Stop } from 'react-native-svg';
 import AnimatedSvgPath from './AnimatedPath';
+import AnimatedRect from './AnimatedRect';
 
 import type { valueXY } from '../types';
 
@@ -101,12 +102,35 @@ class SvgMask extends Component<Props, State> {
           this.state.canvasSize
             ? (
               <Svg pointerEvents="none" width={this.state.canvasSize.x} height={this.state.canvasSize.y}>
-                <AnimatedSvgPath
+                <Defs>
+                  <RadialGradient
+                    id="grad"
+                  >
+                    <Stop
+                      offset="0"
+                      stopColor="white"
+                      stopOpacity="0"
+                    />
+                    <Stop
+                      offset="1"
+                      stopColor={this.props.backdropColor}
+                      stopOpacity="0.4"
+                    />
+                  </RadialGradient>
+                </Defs>
+                <Path
                   ref={(ref) => { this.mask = ref; }}
                   fill={this.props.backdropColor}
                   fillRule="evenodd"
-                  strokeWidth={1}
+                  strokeWidth={0}
                   d={path(this.state.size, this.state.position, this.state.canvasSize)}
+                />
+                <AnimatedRect
+                  x={this.state.position.x}
+                  y={this.state.position.y}
+                  width={this.state.size.x}
+                  height={this.state.size.y}
+                  fill="url(#grad)"
                 />
               </Svg>
             )

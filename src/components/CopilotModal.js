@@ -41,7 +41,7 @@ const noop = () => {};
 class CopilotModal extends Component<Props, State> {
   static defaultProps = {
     easing: Easing.elastic(0.7),
-    animationDuration: 400,
+    animationDuration: 500,
     tooltipComponent: Tooltip,
     stepNumberComponent: StepNumber,
     // If react-native-svg native module was avaialble, use svg as the default overlay component
@@ -232,7 +232,7 @@ class CopilotModal extends Component<Props, State> {
     /* eslint-enable */
     return (
       <MaskComponent
-        animated={this.props.animated}
+        animated={false}
         layout={this.state.layout}
         style={styles.overlayContainer}
         size={this.state.size}
